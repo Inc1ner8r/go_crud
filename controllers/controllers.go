@@ -63,3 +63,16 @@ func GetBookById(w http.ResponseWriter, r *http.Request) {
 		log.Fatal("get a book failed")
 	}
 }
+func UpdateBook(w http.ResponseWriter, r *http.Request) {
+	book := models.Book{}
+	if err := json.NewDecoder(r.Body).Decode(&book); err != nil {
+		log.Fatal("error in decoding")
+	}
+
+	id := mux.Vars(r)["id"]
+	idInt, _ := strconv.Atoi(id)
+	index := indexById(books, idInt)
+
+	books[index] = book
+	w.WriteHeader(http.StatusOK)
+}
