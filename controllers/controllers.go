@@ -48,3 +48,18 @@ func DeleteBook(w http.ResponseWriter, r *http.Request) {
 	books = append(books[:index], books[index+1:]...)
 	w.WriteHeader(http.StatusOK)
 }
+
+func GetBookById(w http.ResponseWriter, r *http.Request) {
+	id := mux.Vars(r)["id"]
+	idInt, _ := strconv.Atoi(id)
+	index := indexById(books, idInt)
+
+	if index < 0 {
+		http.Error(w, "Book not found", http.StatusNotFound)
+		return
+	}
+	w.Header().Add("Content-Type", "application/json")
+	if err := json.NewEncoder(w).Encode(books[index]); err != nil {
+		log.Fatal("get a book failed")
+	}
+}
