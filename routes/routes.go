@@ -8,5 +8,7 @@ import (
 )
 
 func Routes(r *mux.Router) {
-	r.Methods(http.MethodGet).HandlerFunc(controllers.GetBooks)
+	r.Path("/getBooks").Methods(http.MethodGet).HandlerFunc(controllers.GetBooks)
+	r.Path("postBook").Methods(http.MethodPost).HandlerFunc(controllers.PostBook)
+	r.Path("deleteBook/{id}").Methods(http.MethodDelete).HandlerFunc(controllers.DeleteBook)
 }
