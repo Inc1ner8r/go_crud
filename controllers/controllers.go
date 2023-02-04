@@ -23,14 +23,14 @@ func indexById(books []models.Book, id int) int {
 func GetBooks(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(books); err != nil {
-		log.Fatal("get books failed")
+		log.Fatal(err.Error())
 	}
 
 }
 func PostBook(w http.ResponseWriter, r *http.Request) {
 	book := models.Book{}
 	if err := json.NewDecoder(r.Body).Decode(&book); err != nil {
-		log.Fatal("error in decoding")
+		log.Fatal(err.Error())
 	}
 
 	books = append(books, book)
@@ -60,13 +60,13 @@ func GetBookById(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Add("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(books[index]); err != nil {
-		log.Fatal("get a book failed")
+		log.Fatal(err.Error())
 	}
 }
 func UpdateBook(w http.ResponseWriter, r *http.Request) {
 	book := models.Book{}
 	if err := json.NewDecoder(r.Body).Decode(&book); err != nil {
-		log.Fatal("error in decoding")
+		log.Fatal(err.Error())
 	}
 
 	id := mux.Vars(r)["id"]
