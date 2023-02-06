@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -75,4 +76,7 @@ func UpdateBook(w http.ResponseWriter, r *http.Request) {
 
 	books[index] = book
 	w.WriteHeader(http.StatusOK)
+}
+func Hello(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Api is up")
 }

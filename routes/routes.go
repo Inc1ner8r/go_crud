@@ -13,4 +13,5 @@ func Routes(r *mux.Router) {
 	r.Path("/deleteBook/{id}").Methods(http.MethodDelete).HandlerFunc(controllers.DeleteBook)
 	r.Path("/getBook/{id}").Methods(http.MethodGet).HandlerFunc(controllers.GetBookById)
 	r.Path("/updateBook/{id}").Methods(http.MethodPut).HandlerFunc(controllers.UpdateBook)
+	r.Path("/").Methods(http.MethodGet).HandlerFunc(controllers.Hello)
 }
